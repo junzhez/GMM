@@ -24,6 +24,7 @@ cost_prev = 0;
 while(true)
     r = zeros(K, C);
     
+    % The E step
     for i = 1 : C
         for j = 1 : K
             r(j, i) = prob(j) * mvnpdf(X(:, i), miu(:,j), sig(:,:,j));
@@ -32,6 +33,7 @@ while(true)
 
     r = r ./ repmat(sum(r), 3, 1);
 
+    % M step
     N_k = sum(r, 2);
 
     for i = 1 : K
@@ -54,6 +56,7 @@ while(true)
 
     cost = 0;
 
+    % Caculate the log likelihood
     for i = 1 : C
         inner_sum = 0;
         for j = 1 : K

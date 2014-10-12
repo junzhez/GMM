@@ -30,7 +30,9 @@ while(true)
     [val, ind] = min(dist);
 
     r = zeros(C, K);
-
+    
+    % the fast kmean, miu_k_new = miu_k_old + learning_rate * 
+    % (x_n - miu_k_old)
     for i = 1 : C
         r(i, ind(i)) = 1;
         miu(:,ind(i)) = miu(:,ind(i)) + learning_rate*(X(:,i) - miu(:,ind(i)));
@@ -47,7 +49,7 @@ while(true)
     cost_prev = cost;
 end
 
- plot(X(1,:), X(2,:), '.');
- hold on;
- plot(miu(1,:), miu(2,:), 'r.');
+plot(X(1,:), X(2,:), '.');
+hold on;
+plot(miu(1,:), miu(2,:), 'r.');
 

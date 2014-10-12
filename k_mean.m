@@ -3,6 +3,8 @@ clear all;
 
 load gmm_data;
 
+% The kmean algorithm
+
 K = 3;
 
 [R, C] = size(X);
@@ -32,9 +34,11 @@ while(true)
     for i = 1 : C
         r(i, ind(i)) = 1;
     end
-
+    
+    % minize cost J
     cost = sum(sum(r' .* dist));
 
+    % update the miu
     for i = 1 : K
         miu(:,i) = sum((repmat(r(:, i)', 2, 1) .* X),2) / sum(r(:,i));
     end
@@ -48,3 +52,7 @@ while(true)
     cost_prev = cost;
 end
 
+% plot the image
+plot(X(1,:), X(2,:), '.');
+hold on;
+plot(miu(1,:), miu(2,:), 'r.');
